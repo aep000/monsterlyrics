@@ -119,7 +119,7 @@ def hello():
 <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 </ul>
 <ul class="copyright">
-<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 </ul>
 </footer>
 
