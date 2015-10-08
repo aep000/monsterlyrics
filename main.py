@@ -5,6 +5,10 @@ import urllib
 app = Flask(__name__)
 app.debug = True
 @app.route('/', methods=['GET', 'POST'])
+def main():
+    f = open('index.html','r');
+    return f.read()
+@app.route('/search', methods=['GET', 'POST'])
 def hello():
     html ='''
     <!DOCTYPE HTML>
@@ -52,7 +56,7 @@ def hello():
     				<!-- Main -->
     					<article id="main">
     						<header>
-    							<h2>Seach</h2>
+    							<h2>Search</h2>
     							<p><form method="get" action="/">
 										<div class="row uniform">
 											<div class="12u$">
@@ -69,7 +73,7 @@ def hello():
     						</header>
     						<section class="wrapper style5">
     							<div class="inner">
-    <div class="table-wrapper">
+    <!---<div class="table-wrapper"> -->
         <table class="alt">
             <thead>
                 <tr>
@@ -77,6 +81,7 @@ def hello():
                     <th>Name</th>
                     <th>Album</th>\
                     <th>Artists</th>
+                    <th>Preview</th>
                     <th>Vote</th>
                 </tr>
             </thead>
@@ -87,6 +92,7 @@ def hello():
     Datadict = json.loads(f.read())
     tot = "List of tracks\n"
     for item in Datadict['tracks']['items']:
+        preview = item['preview_url']
         name = item['name']
         album = item['album']['name']
         albumart = item['album']['images'][1]['url']
@@ -94,7 +100,7 @@ def hello():
         for artist in item['artists']:
             artists += artist['name']+", "
         Id = item['id']
-        html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><a href="/vote?id'+Id+'" class="button fit">Vote</a></td></tr>'
+        html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id'+Id+'" class="button fit">Vote</a></td></tr>'
         tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
     html += '''
     </tbody>
@@ -136,17 +142,12 @@ def hello():
     return html
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
+    pass
 
 
 
 
 #('Username', 'Password')
 
-'''
-if __name__ == "__main__":
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-'''
 
 app.run(host='localhost', port=80)
