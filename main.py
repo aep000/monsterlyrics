@@ -149,5 +149,5 @@ def storeData():
 
 #('Username', 'Password')
 
-
-app.run(host='localhost', port=80)
+if __name__="__main__":
+    app.run(host='localhost', port=80)
