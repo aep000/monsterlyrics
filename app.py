@@ -33,7 +33,6 @@ def dbinsert(query):
     )
     cur = con.cursor()
     cur.execute(query)
-    results =  cur.fetchall()
     con.commit()
     con.close()
 app = Flask(__name__)
