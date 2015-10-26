@@ -197,7 +197,7 @@ def storeData():
     else:
         query = "INSERT INTO votes (songid, votes) VALUES ('"+songID+"',1)"
         dbinsert(query)
-    return "IT WORKED"
+    return redirect("/search", code=302)
 
 
 
