@@ -174,12 +174,12 @@ def hello():
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
     songID = request.args.get('id')
-    query = "SELECT * FROM songs WHERE songID="+songID
+    query = "SELECT * FROM votes WHERE songid="+songID
     if len(dbquery(query))>0:
-        query = "UPDATE songs SET anthemID = anthemID + 1 WHERE songID="+songID;
+        query = "UPDATE votes SET anthemid = anthemID + 1 WHERE songID="+songID;
         dbinsert(query)
     else:
-        query = "INSERT INTO songs (songID, votes) VALUES ("+songID+",1)"
+        query = "INSERT INTO votes (songid, votes) VALUES ("+songID+",1)"
         dbinsert(query)
     return redirect("/search", code=302)
 

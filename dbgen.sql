@@ -1,4 +1,4 @@
-CREATE TABLE songs (
-songID bigInt NULL,
+CREATE TABLE votes (
+songID text NULL,
 votes bigInt NULL
 );
