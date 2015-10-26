@@ -16,7 +16,7 @@ def dbquery(query):
     host=url.hostname,
     port=url.port
     )
-    cur = con.cursor(mdb.cursors.DictCursor)
+    cur = con.cursor()
     cur.execute(query)
     results =  cur.fetchall()
     con.close()
@@ -31,7 +31,7 @@ def dbinsert(query):
         host=url.hostname,
         port=url.port
     )
-    cur = con.cursor(mdb.cursors.DictCursor)
+    cur = con.cursor()
     cur.execute(query)
     results =  cur.fetchall()
     con.commit()
