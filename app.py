@@ -3,9 +3,10 @@ import json
 import os
 import urllib
 import psycopg2
+import urlparse
 def dbquery(query):
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["postgres://zxmmjbukizsdlt:67n4iId2u3bMIoWBcY05RzhaR3@ec2-107-21-219-235.compute-1.amazonaws.com:5432/ddm3fsqv1sgemd"])
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
     con = psycopg2.connect(
     database=url.path[1:],
     user=url.username,
@@ -20,7 +21,7 @@ def dbquery(query):
     return results
 def dbinsert(query):
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["postgres://zxmmjbukizsdlt:67n4iId2u3bMIoWBcY05RzhaR3@ec2-107-21-219-235.compute-1.amazonaws.com:5432/ddm3fsqv1sgemd"])
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
     con = psycopg2.connect(
         database=url.path[1:],
         user=url.username,
@@ -188,4 +189,5 @@ def storeData():
 #('Username', 'Password')
 
 if __name__=="__main__":
+    app.debug = True
     app.run()
