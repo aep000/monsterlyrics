@@ -186,7 +186,7 @@ def songExists(songID):
         port=url.port
     )
     cur = con.cursor()
-    cur.execute("query = SELECT * FROM votes WHERE songid = '"+songID+"'")
+    cur.execute("SELECT * FROM votes WHERE songid = '"+songID+"'")
     return cur.fetchone() is not None
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
