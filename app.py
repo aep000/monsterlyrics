@@ -175,11 +175,24 @@ def hello():
     '''
 
     return html
+def songExists(songID):
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    con = mdb.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
+    cur = con.cursor()
+    cur.execute("query = SELECT * FROM votes WHERE songid = '"+songID+"'")
+    return cur.fetchone() is not None
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
     songID = request.args.get('id')
     query = "SELECT * FROM votes WHERE songid = '"+songID+"'"
-    if len(dbquery(query))>0:
+    if songExists(songID):
         query = "UPDATE votes SET anthemid = anthemID + 1 WHERE songID = '"+songID+"'";
         dbinsert(query)
     else:
