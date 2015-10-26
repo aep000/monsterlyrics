@@ -9,7 +9,7 @@ import logging
 def dbquery(query):
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
-    con = psycopg2.connect(
+    con = mdb.connect(
     database=url.path[1:],
     user=url.username,
     password=url.password,
@@ -24,7 +24,7 @@ def dbquery(query):
 def dbinsert(query):
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
-    con = psycopg2.connect(
+    con = mdb.connect(
         database=url.path[1:],
         user=url.username,
         password=url.password,
