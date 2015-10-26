@@ -5,7 +5,7 @@ import urllib
 import psycopg2
 def dbquery(query):
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    url = urlparse.urlparse(os.environ["postgres://zxmmjbukizsdlt:67n4iId2u3bMIoWBcY05RzhaR3@ec2-107-21-219-235.compute-1.amazonaws.com:5432/ddm3fsqv1sgemd"])
     con = psycopg2.connect(
     database=url.path[1:],
     user=url.username,
@@ -20,7 +20,7 @@ def dbquery(query):
     return results
 def dbinsert(query):
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    url = urlparse.urlparse(os.environ["postgres://zxmmjbukizsdlt:67n4iId2u3bMIoWBcY05RzhaR3@ec2-107-21-219-235.compute-1.amazonaws.com:5432/ddm3fsqv1sgemd"])
     con = psycopg2.connect(
         database=url.path[1:],
         user=url.username,
@@ -130,7 +130,7 @@ def hello():
         for artist in item['artists']:
             artists += artist['name']+", "
         Id = item['id']
-        html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id'+Id+'" class="button fit">Vote</a></td></tr>'
+        html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
         tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
     html += '''
     </tbody>
