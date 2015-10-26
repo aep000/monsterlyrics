@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, jsonify
 import json
 import os
 import urllib
-import psycopg2
+import psycopg2 as mdb
 import urlparse
 import sys
 import logging
