@@ -4,6 +4,8 @@ import os
 import urllib
 import psycopg2
 import urlparse
+import sys
+import logging
 def dbquery(query):
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
@@ -35,6 +37,8 @@ def dbinsert(query):
     con.commit()
     con.close()
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     f = open('index.html','r');
@@ -181,7 +185,7 @@ def storeData():
     else:
         query = "INSERT INTO votes (songid, votes) VALUES ("+songID+",1)"
         dbinsert(query)
-    return redirect("/search", code=302)
+    return "IT WORKED"
 
 
 
