@@ -2,6 +2,37 @@ from flask import Flask, request, redirect, jsonify
 import json
 import os
 import urllib
+import psycopg2
+def dbquery(query):
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    con = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+    )
+    cur = con.cursor(mdb.cursors.DictCursor)
+    cur.execute(query)
+    results =  cur.fetchall()
+    con.close()
+    return results
+def dbinsert(query):
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    con = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
+    cur = con.cursor(mdb.cursors.DictCursor)
+    cur.execute(query)
+    results =  cur.fetchall()
+    con.commit()
+    con.close()
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -141,7 +172,15 @@ def hello():
     return html
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
-    pass
+    songID = request.args.get('id')
+    query = "SELECT * FROM songs WHERE songID="+songID
+    if len(dbquery(query))>0:
+        query = "UPDATE songs SET anthemID = anthemID + 1 WHERE songID="+songID;
+        dbinsert(query)
+    else:
+        query = "INSERT INTO songs (songID, votes) VALUES ("+songID+",1)"
+        dbinsert(query)
+    return redirect("/search", code=302)
 
 
 
