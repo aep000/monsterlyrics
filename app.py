@@ -91,7 +91,7 @@ def hello():
     					<article id="main">
     						<header>
     							<h2>Search</h2>
-    							<p><form method="get" action="/">
+    							<p><form method="get" action="/search">
 										<div class="row uniform">
 											<div class="12u$">
 												<input type="text" name="search" id="demo-name" value="" placeholder="Search for an Artist, Song, or Album" />
@@ -133,6 +133,7 @@ def hello():
         artists = ''
         for artist in item['artists']:
             artists += artist['name']+", "
+        artists = artists[:-1]
         Id = item['id']
         html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
         tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
