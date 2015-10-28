@@ -227,6 +227,7 @@ def cast():
     if done != '1':
         query = "SELECT * FROM done WHERE songid = '"+songID+"'"
         retval = dbquery(query)
+        url=""
         for row in retval:
             url = row[1]
         html = '''
