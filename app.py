@@ -143,7 +143,7 @@ def hello():
                 artists += artist['name']+", "
             artists = artists[:-1]
             Id = item['id']
-            html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
+            html += "<tr><td><image src="+albumart+" height="42" width="42"/></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
             tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
         html += '''
         </tbody>
