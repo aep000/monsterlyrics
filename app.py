@@ -309,7 +309,7 @@ def cast():
         	</body>
         </html>
         '''
-    elif nodo == 1:
+    elif nodo == '1':
         html = '''
         <!DOCTYPE HTML>
         <!--
