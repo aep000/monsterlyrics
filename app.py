@@ -469,8 +469,7 @@ def cast():
         	</body>
         </html>
         '''
-    f = open('generic.html','r');
-    return f.read()
+    return html
 
 
 
