@@ -224,7 +224,7 @@ def cast():
     songID = request.args.get('SID')
     done = request.args.get('done')
     nodo = request.args.get('nodo')
-    if done != '1':
+    if done != 1:
         query = "SELECT * FROM done WHERE songid = '"+songID+"'"
         retval = dbquery(query)
         url=""
@@ -309,7 +309,7 @@ def cast():
         	</body>
         </html>
         '''
-    elif nodo == '1':
+    elif nodo == 1:
         html = '''
         <!DOCTYPE HTML>
         <!--
