@@ -141,7 +141,7 @@ def hello():
             artists = ''
             for artist in item['artists']:
                 artists += artist['name']+", "
-            artists = artists[:-1]
+            artists = artists[:-2]
             Id = item['id']
             html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
             tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
