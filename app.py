@@ -56,6 +56,13 @@ def hello():
     		<title>Monsterlyrics</title>
     		<meta charset="utf-8" />
     		<meta name="viewport" content="width=device-width, initial-scale=1" />
+                <script src="aep000.neocities.org/assets/js/jquery.min.js"></script>
+                <script src="aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
+                <script src="aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
+                <script src="aep000.neocities.org/assets/js/skel.min.js"></script>
+                <script src="aep000.neocities.org/assets/js/util.js"></script>
+                <!--[if lte IE 8]><script src="aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
+                <script src="aep000.neocities.org/assets/js/main.js"></script>
     		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     		<link rel="stylesheet" href="https://aep000.neocities.org/assets/css/main.css" />
     		<!--[if lte IE 8]><link rel="stylesheet" href="aep000.neocities.org/assets/css/ie8.css" /><![endif]-->
@@ -121,60 +128,63 @@ def hello():
             </thead>
             <tbody>
     '''
-    url ="https://api.spotify.com/v1/search?query="+request.args.get('search')+"&offset=0&limit=25&type=track".replace(' ','%20')
-    f = urllib.urlopen(url);
-    Datadict = json.loads(f.read())
-    tot = "List of tracks\n"
-    for item in Datadict['tracks']['items']:
-        preview = item['preview_url']
-        name = item['name']
-        album = item['album']['name']
-        albumart = item['album']['images'][1]['url']
-        artists = ''
-        for artist in item['artists']:
-            artists += artist['name']+", "
-        artists = artists[:-1]
-        Id = item['id']
-        html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
-        tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
-    html += '''
-    </tbody>
-</table>
-</div>
-</div>
-</section>
-</article>
+    try:
+        url ="https://api.spotify.com/v1/search?query="+request.args.get('search')+"&offset=0&limit=25&type=track".replace(' ','%20')
+        f = urllib.urlopen(url);
+        Datadict = json.loads(f.read())
+        tot = "List of tracks\n"
+        for item in Datadict['tracks']['items']:
+            preview = item['preview_url']
+            name = item['name']
+            album = item['album']['name']
+            albumart = item['album']['images'][1]['url']
+            artists = ''
+            for artist in item['artists']:
+                artists += artist['name']+", "
+            artists = artists[:-1]
+            Id = item['id']
+            html += "<tr><td><image src="+albumart+" /></td><td>"+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
+            tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
+        html += '''
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </section>
+    </article>
 
-<!-- Footer -->
-<footer id="footer">
-<ul class="icons">
-<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-</ul>
-<ul class="copyright">
-<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-</ul>
-</footer>
+    <!-- Footer -->
+    <footer id="footer">
+    <ul class="icons">
+    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+    <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+    <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright">
+    <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+    </ul>
+    </footer>
 
-</div>
+    </div>
 
-<!-- Scripts -->
-<script src="aep000.neocities.org/assets/js/jquery.min.js"></script>
-<script src="aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
-<script src="aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
-<script src="aep000.neocities.org/assets/js/skel.min.js"></script>
-<script src="aep000.neocities.org/assets/js/util.js"></script>
-<!--[if lte IE 8]><script src="aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
-<script src="aep000.neocities.org/assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="aep000.neocities.org/assets/js/jquery.min.js"></script>
+    <script src="aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
+    <script src="aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
+    <script src="aep000.neocities.org/assets/js/skel.min.js"></script>
+    <script src="aep000.neocities.org/assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="aep000.neocities.org/assets/js/main.js"></script>
 
-</body>
-</html>
-    '''
+    </body>
+    </html>
+        '''
 
-    return html
+        return html
+    except:
+        return html
 def songExists(songID):
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
