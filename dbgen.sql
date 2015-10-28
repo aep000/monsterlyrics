@@ -1,4 +1,3 @@
-CREATE TABLE votes (
-songID text NULL,
-votes bigInt NULL
+CREATE TABLE nodo (
+songID text NULL
 );

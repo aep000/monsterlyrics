@@ -185,7 +185,7 @@ def hello():
         return html
     except:
         return html
-def songExists(songID):
+def songExists(songID,q):
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
     con = mdb.connect(
@@ -196,20 +196,280 @@ def songExists(songID):
         port=url.port
     )
     cur = con.cursor()
-    cur.execute("SELECT * FROM votes WHERE songid = '"+songID+"'")
+    cur.execute(q)
     return cur.fetchone() is not None
 @app.route("/vote", methods=['GET', 'POST'])
 def storeData():
+    redir ="/cast"
     songID = request.args.get('id')
-    query = "SELECT * FROM votes WHERE songid = '"+songID+"'"
-    if songExists(songID):
-        query = "UPDATE votes SET votes = votes + 1 WHERE songID = '"+songID+"'";
-        dbinsert(query)
+    query = "SELECT * FROM done WHERE songid = '"+songID+"'"
+    query1 = "SELECT * FROM nodo WHERE songid = '"+songID+"'"
+    if songExists(songID,query):
+        redir +="?done=1&SID="+songID+"&nodo=0"
+    elif songExists(songID,query1):
+        redir +="?done=0&SID="+songID+"&nodo=1"
     else:
-        query = "INSERT INTO votes (songid, votes) VALUES ('"+songID+"',1)"
-        dbinsert(query)
-    return redirect("/", code=302)
+        redir +="?done=0&SID="+songID+"&nodo=0"
+        query = "SELECT * FROM votes WHERE songid = '"+songID+"'"
+        if songExists(songID,query):
+            query = "UPDATE votes SET votes = votes + 1 WHERE songID = '"+songID+"'";
+            dbinsert(query)
+        else:
+            query = "INSERT INTO votes (songid, votes) VALUES ('"+songID+"',1)"
+            dbinsert(query)
 
+    return redirect(redir, code=302)
+@app.route("/cast", methods=['GET', 'POST'])
+def cast():
+    songID = request.args.get('SID')
+    done = request.args.get('done')
+    nodo = request.args.get('nodo')
+    if done != '1':
+        query = "SELECT * FROM done WHERE songid = '"+songID+"'"
+        retval = dbquery(query)
+        for row in retval:
+            url = row[1]
+        html = '''
+        <!DOCTYPE HTML>
+        <!--
+        	Spectral by HTML5 UP
+        	html5up.net | @n33co
+        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+        -->
+        <html>
+        	<head>
+        		<title>Generic - Spectral by HTML5 UP</title>
+        		<meta charset="utf-8" />
+        		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        		<link rel="stylesheet" href="http://aep000.neocities.org/assets/css/main.css" />
+        		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        	</head>
+        	<body>
+
+        		<!-- Page Wrapper -->
+        			<div id="page-wrapper">
+
+        				<!-- Header -->
+        					<header id="header">
+        						<h1><a href="index.html">Spectral</a></h1>
+        						<nav id="nav">
+        							<ul>
+        								<li class="special">
+        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+        									<div id="menu">
+        										<ul>
+        											<li><a href="index.html">Home</a></li>
+        											<li><a href="generic.html">Generic</a></li>
+        											<li><a href="elements.html">Elements</a></li>
+        											<li><a href="#">Sign Up</a></li>
+        											<li><a href="#">Log In</a></li>
+        										</ul>
+        									</div>
+        								</li>
+        							</ul>
+        						</nav>
+        					</header>
+
+        				<!-- Main -->
+        					<article id="main">
+        						<header>
+        							<h2>THIS SONG HAS ALREADY BEEN DONE</h2>
+        							<a href = "'''+url+'''"><p>CLICK HERE TO SEE IT</p></a>
+        						</header>
+        					</article>
+
+        				<!-- Footer -->
+        					<footer id="footer">
+        						<ul class="icons">
+        							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+        							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+        							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        						</ul>
+        						<ul class="copyright">
+        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        						</ul>
+        					</footer>
+
+        			</div>
+
+        		<!-- Scripts -->
+        			<script src="http://aep000.neocities.org/assets/js/jquery.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/skel.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/util.js"></script>
+        			<!--[if lte IE 8]><script src="http://aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
+        			<script src="http://aep000.neocities.org/assets/js/main.js"></script>
+
+        	</body>
+        </html>
+        '''
+    elif nodo == '1':
+        html = '''
+        <!DOCTYPE HTML>
+        <!--
+        	Spectral by HTML5 UP
+        	html5up.net | @n33co
+        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+        -->
+        <html>
+        	<head>
+        		<title>Generic - Spectral by HTML5 UP</title>
+        		<meta charset="utf-8" />
+        		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        		<link rel="stylesheet" href="http://aep000.neocities.org/assets/css/main.css" />
+        		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        	</head>
+        	<body>
+
+        		<!-- Page Wrapper -->
+        			<div id="page-wrapper">
+
+        				<!-- Header -->
+        					<header id="header">
+        						<h1><a href="index.html">Spectral</a></h1>
+        						<nav id="nav">
+        							<ul>
+        								<li class="special">
+        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+        									<div id="menu">
+        										<ul>
+        											<li><a href="index.html">Home</a></li>
+        											<li><a href="generic.html">Generic</a></li>
+        											<li><a href="elements.html">Elements</a></li>
+        											<li><a href="#">Sign Up</a></li>
+        											<li><a href="#">Log In</a></li>
+        										</ul>
+        									</div>
+        								</li>
+        							</ul>
+        						</nav>
+        					</header>
+
+        				<!-- Main -->
+        					<article id="main">
+        						<header>
+        							<h2>SORRY WE ARE NOT GOING TO DO THIS ONE</h2>
+        							<a href = "/"><p>CLICK HERE TO RETURN TO THE HOMEPAGE</p></a>
+        						</header>
+        					</article>
+
+        				<!-- Footer -->
+        					<footer id="footer">
+        						<ul class="icons">
+        							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+        							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+        							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        						</ul>
+        						<ul class="copyright">
+        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        						</ul>
+        					</footer>
+
+        			</div>
+
+        		<!-- Scripts -->
+        			<script src="http://aep000.neocities.org/assets/js/jquery.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/skel.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/util.js"></script>
+        			<!--[if lte IE 8]><script src="http://aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
+        			<script src="http://aep000.neocities.org/assets/js/main.js"></script>
+
+        	</body>
+        </html>
+        '''
+    else:
+        html = '''
+        <!DOCTYPE HTML>
+        <!--
+        	Spectral by HTML5 UP
+        	html5up.net | @n33co
+        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+        -->
+        <html>
+        	<head>
+        		<title>Generic - Spectral by HTML5 UP</title>
+        		<meta charset="utf-8" />
+        		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        		<link rel="stylesheet" href="http://aep000.neocities.org/assets/css/main.css" />
+        		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        	</head>
+        	<body>
+
+        		<!-- Page Wrapper -->
+        			<div id="page-wrapper">
+
+        				<!-- Header -->
+        					<header id="header">
+        						<h1><a href="index.html">Spectral</a></h1>
+        						<nav id="nav">
+        							<ul>
+        								<li class="special">
+        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+        									<div id="menu">
+        										<ul>
+        											<li><a href="index.html">Home</a></li>
+        											<li><a href="generic.html">Generic</a></li>
+        											<li><a href="elements.html">Elements</a></li>
+        											<li><a href="#">Sign Up</a></li>
+        											<li><a href="#">Log In</a></li>
+        										</ul>
+        									</div>
+        								</li>
+        							</ul>
+        						</nav>
+        					</header>
+
+        				<!-- Main -->
+        					<article id="main">
+        						<header>
+        							<h2>YOUR VOTE HAS BEEN PROCESSED</h2>
+        							<a href = "/"><p>CLICK HERE TO RETURN TO THE HOMEPAGE</p></a>
+        						</header>
+        					</article>
+
+        				<!-- Footer -->
+        					<footer id="footer">
+        						<ul class="icons">
+        							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+        							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+        							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        						</ul>
+        						<ul class="copyright">
+        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        						</ul>
+        					</footer>
+
+        			</div>
+
+        		<!-- Scripts -->
+        			<script src="http://aep000.neocities.org/assets/js/jquery.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrollex.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/jquery.scrolly.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/skel.min.js"></script>
+        			<script src="http://aep000.neocities.org/assets/js/util.js"></script>
+        			<!--[if lte IE 8]><script src="http://aep000.neocities.org/assets/js/ie/respond.min.js"></script><![endif]-->
+        			<script src="http://aep000.neocities.org/assets/js/main.js"></script>
+
+        	</body>
+        </html>
+        '''
+    f = open('generic.html','r');
+    return f.read()
 
 
 
