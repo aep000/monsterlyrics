@@ -62,7 +62,7 @@ def index():
     f = open('index.html','r');
     return f.read()
 @app.route('/dashboard', methods=['GET', 'POST'])
-def hello():
+def dash():
     html ='''
     <!DOCTYPE HTML>
     <!--
