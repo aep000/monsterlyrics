@@ -117,7 +117,7 @@ def dash():
     					<article id="main">
     						<header>
     							<h2>Search</h2>
-    							<p><form method="get" action="/search">
+    							<p><form method="get" action="/dashboard">
 										<div class="row uniform">
 											<div class="12u$">
 												<input type="text" name="search" id="demo-name" value="" placeholder="Search for an Artist, Song, or Album" />
