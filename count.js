@@ -16,13 +16,17 @@ function getCookie(cname) {
 }
 function checkCookie() {
     var user = getCookie("vcast");
+    user = +user
     if (user != "") {
         setCookie("vcast","1",7);
     }
     else {
-     if user<
-      count +user;
-      count +=1;
+     if (user<5){
+      count = user+1;
       setCookie("vcast", count+"",7)
+     }
+     else{
+         window.location.replace("/noVote");
+     }
     }
   }
