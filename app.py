@@ -71,11 +71,11 @@ def index():
     search = urllib.urlopen(url);
     print url
     label = "{"
-    #Datadict = json.loads(search.read())
-    #for item in Datadict['tracks']['items']:
-    #    label += item['name']
-    #label = label[:-1]+"}"'''
-    #print search.read()
+    Datadict = json.loads(search.read())
+    for item in Datadict['tracks']:
+        label += item['name']+","
+    label = label[:-1]+"}
+    print search.read()
     print votes
     print label
     f = open('index.html','r');
