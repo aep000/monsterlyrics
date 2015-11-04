@@ -60,11 +60,10 @@ def index():
     query = "SELECT * FROM votes ORDER BY votes DESC LIMIT 5"
     retval = dbquery(query)
     c = 0
-    songIDs = {}
     votes = "{"
     url = "https://api.spotify.com/v1/tracks/?ids="
     for row in retval:
-        votes += row[1]+""
+        votes += row[1]+","
         url += row[0]+","
         c+=1
     url = url[:-1]
