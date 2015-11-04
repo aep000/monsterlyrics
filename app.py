@@ -75,7 +75,7 @@ def index():
     #for item in Datadict['tracks']['items']:
     #    label += item['name']
     #label = label[:-1]+"}"'''
-    print search.read()
+    #print search.read()
     print votes
     print label
     f = open('index.html','r');
