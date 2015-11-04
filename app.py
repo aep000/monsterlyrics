@@ -61,17 +61,23 @@ def index():
     retval = dbquery(query)
     c = 0
     songIDs = {}
-    votes = {}
+    votes = "{"
     url = "https://api.spotify.com/v1/tracks/?ids="
     for row in retval:
-        songIDs[c] = row[0]
-        votes[c] = row[1]
+        votes += row[1]+""
         url += row[0]+","
         c+=1
     url = url[:-1]
+    votes = votes[:-1]+"}"
     search = urllib.urlopen(url);
     print url
+    label = "{"
     Datadict = json.loads(search.read())
+    for item in Datadict['tracks']['items']:
+        label += item['name']
+    label = label[:-1]+"}"
+    print votes
+    print label
     f = open('index.html','r');
     return f.read()
 
