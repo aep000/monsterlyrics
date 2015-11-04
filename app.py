@@ -71,7 +71,7 @@ def index():
         c+=1
     url = url[:-1]
     search = urllib.urlopen(url);
-    Datadict = json.loads(f.read())
+    Datadict = json.loads(search.read())
     f = open('index.html','r');
     return search+f.read()
 
