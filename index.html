@@ -90,24 +90,7 @@
 					<section id="one" class="wrapper style2 special">
 						<div class="inner">
 							<canvas id="myChart" width="900" height="700"></canvas>
-							<script>
-							var ctx = document.getElementById("myChart").getContext("2d");
-							var data = {
-								labels: ["January", "February", "March", "April", "May", "June", "July"],
-								datasets: [
-								{
-									label: "My First dataset",
-									fillColor: "rgba(220,220,220,0.5)",
-									strokeColor: "rgba(220,220,220,0.8)",
-									highlightFill: "rgba(220,220,220,0.75)",
-									highlightStroke: "rgba(220,220,220,1)",
-									data: [65, 59, 80, 81, 56, 55, 40]
-									}
-									]
-								}
-
-								var myBarChart = new Chart(ctx).Bar(data);
-									</script>
+							
 
 						</div>
 					</section>
@@ -229,6 +212,3 @@
 			<script src="https://aep000.neocities.org/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="https://aep000.neocities.org/assets/js/main.js"></script>
-
-	</body>
-</html>
