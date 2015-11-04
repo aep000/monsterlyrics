@@ -63,7 +63,7 @@ def index():
     songs = {}
     url = "https://api.spotify.com/v1/tracks/?ids="
     for row in retval:
-        print row
+        print row[0]
         songs[c]['songID'] = row[0]
         songs[c]['votes'] = row[1]
         url += row[0]
