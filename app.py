@@ -57,7 +57,7 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    query = "SELECT * FROM votes ORDER BY DESC votes LIMIT 5"
+    query = "SELECT * FROM votes ORDER BY votes DESC LIMIT 5"
     retval = dbquery(query)
     c = 0
     url = "https://api.spotify.com/v1/tracks/?ids="
