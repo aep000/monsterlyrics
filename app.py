@@ -73,7 +73,7 @@ def index():
     label = "["
     Datadict = json.loads(search.read())
     for item in Datadict['tracks']:
-        label += item['name']+","
+        label += '"'+item['name']+'",'
     label = label[:-1]+"]"
     print search.read()
     print votes
@@ -91,7 +91,7 @@ def index():
             strokeColor: "rgba(220,220,220,0.8)",
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
-            data: ''''+votes+''''
+            data: '''+votes+'''
             }
             ]
         }
