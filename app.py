@@ -66,6 +66,7 @@ def index():
         songs[c]['songID'] = row[0]
         songs[c]['votes'] = row[1]
         url += row[0]
+        c+=1
     url = url[:-1]
     search = urllib.urlopen(url);
     Datadict = json.loads(f.read())
