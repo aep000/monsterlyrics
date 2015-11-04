@@ -73,7 +73,7 @@ def index():
     search = urllib.urlopen(url);
     Datadict = json.loads(search.read())
     f = open('index.html','r');
-    return search
+    return json.dumps(search)
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
