@@ -61,6 +61,12 @@ def index():
 
     f = open('index.html','r');
     return f.read()
+
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    query ="DELETE FROM votes"
+    dbinsert(query)
+    return redirect("/dashboard", code=302)
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dash():
     html ='''
@@ -117,6 +123,7 @@ def dash():
     					<article id="main">
     						<header>
     							<h2>Search</h2>
+                                <a href="/reset" class="button fit">Reset</a>
     							<p><form method="get" action="/dashboard">
 										<div class="row uniform">
 											<div class="12u$">

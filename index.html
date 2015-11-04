@@ -22,11 +22,11 @@
 				<!-- Header -->
 					<header id="header" class="alt">
 						<h1><a href="index.html">Spectral</a></h1>
-						<form method="post" action="#">
+					<!--	<form method="post" action="#">
 
 							<input type="text" value="" placeholder="Search a song" style="display: block;  width: 500px; height: 50px; margin: 0px; padding: 10px; float: left;" />
 				<input type="submit" value="Search" class="special"  style="display: block; margin: 0px;  width: 200px; height: 50px; padding: 0px; " />
-					</form>
+			</form> -->
 						<nav id="nav">
 
 							<!--<ul>
@@ -84,6 +84,30 @@
 								<li><span class="icon fa-code major style3"><span class="label">Dolor</span></span></li>
 							</ul>
                             -->
+						</div>
+					</section>
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<canvas id="myChart" width="400" height="400"></canvas>
+							<script>
+							var ctx = document.getElementById("myChart").getContext("2d");
+							var data = {
+								labels: ["January", "February", "March", "April", "May", "June", "July"],
+								datasets: [
+								{
+									label: "My First dataset",
+									fillColor: "rgba(220,220,220,0.5)",
+									strokeColor: "rgba(220,220,220,0.8)",
+									highlightFill: "rgba(220,220,220,0.75)",
+									highlightStroke: "rgba(220,220,220,1)",
+									data: [65, 59, 80, 81, 56, 55, 40]
+									}
+									]
+								}
+
+								var myBarChart = new Chart(ctx).Bar(data);
+									</script>
+
 						</div>
 					</section>
 
