@@ -74,7 +74,7 @@ def index():
     Datadict = json.loads(search.read())
     for item in Datadict['tracks']:
         label += item['name']+","
-    label = label[:-1]+"}
+    label = label[:-1]+"}"
     print search.read()
     print votes
     print label
