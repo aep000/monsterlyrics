@@ -57,10 +57,20 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    query = "SELECT * FROM votes ORDER BY DESC"
-
+    query = "SELECT * FROM votes ORDER BY DESC votes LIMIT 5"
+    songs[]
+    retval = dbquery(query)
+    c = 0
+    url = "https://api.spotify.com/v1/tracks/?ids="
+    for row in retval:
+        songs[c]['songID'] = row[0]
+        songs[c]['votes'] = row[1]
+        url += row[0]
+    url = url[:-1]
+    search = urllib.urlopen(url);
+    Datadict = json.loads(f.read())
     f = open('index.html','r');
-    return f.read()
+    return search+f.read()
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
