@@ -66,7 +66,7 @@ def index():
     for row in retval:
         songIDs[c] = row[0]
         votes[c] = row[1]
-        url += row[0]
+        url += row[0]+","
         c+=1
     url = url[:-1]
     search = urllib.urlopen(url);
