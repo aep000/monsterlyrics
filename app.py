@@ -64,16 +64,16 @@ def index():
     votes = {}
     url = "https://api.spotify.com/v1/tracks/?ids="
     for row in retval:
-        print row[0]
         songIDs[c] = row[0]
         votes[c] = row[1]
         url += row[0]
         c+=1
     url = url[:-1]
     search = urllib.urlopen(url);
+    print search
     Datadict = json.loads(search.read())
     f = open('index.html','r');
-    return json.dumps(search)
+    return f.read()
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
