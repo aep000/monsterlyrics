@@ -57,55 +57,55 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    try{
-    query = "SELECT * FROM votes ORDER BY votes DESC LIMIT 5"
-    retval = dbquery(query)
-    c = 0
-    votes = "["
-    url = "https://api.spotify.com/v1/tracks/?ids="
-    for row in retval:
-        votes += str(row[1])+","
-        url += row[0]+","
-        c+=1
-    url = url[:-1]
-    votes = votes[:-1]+"]"
-    search = urllib.urlopen(url);
-    print url
-    label = "["
-    Datadict = json.loads(search.read())
-    for item in Datadict['tracks']:
-        label += '"'+item['name']+'",'
-    label = label[:-1]+"]"
-    print search.read()
-    print votes
-    print label
-    f = open('index.html','r');
-    return f.read()+'''
-    <script>
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var data = {
-        labels: '''+label+''',
-        datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: '''+votes+'''
+    try:
+        query = "SELECT * FROM votes ORDER BY votes DESC LIMIT 5"
+        retval = dbquery(query)
+        c = 0
+        votes = "["
+        url = "https://api.spotify.com/v1/tracks/?ids="
+        for row in retval:
+            votes += str(row[1])+","
+            url += row[0]+","
+            c+=1
+        url = url[:-1]
+        votes = votes[:-1]+"]"
+        search = urllib.urlopen(url);
+        print url
+        label = "["
+        Datadict = json.loads(search.read())
+        for item in Datadict['tracks']:
+            label += '"'+item['name']+'",'
+        label = label[:-1]+"]"
+        print search.read()
+        print votes
+        print label
+        f = open('index.html','r');
+        return f.read()+'''
+        <script>
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var data = {
+            labels: '''+label+''',
+            datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: '''+votes+'''
+                }
+                ]
             }
-            ]
-        }
 
-        var myBarChart = new Chart(ctx).Bar(data);
-            </script>
-</body>
-</html>
-'''}
-    except{
-    return"</body></html>" 
+            var myBarChart = new Chart(ctx).Bar(data);
+                </script>
+    </body>
+    </html>
+    '''
+    except:
+        f = open('index.html','r');
+        return f.read()+"</body></html>"
 
-    }
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
