@@ -57,6 +57,7 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    try{
     query = "SELECT * FROM votes ORDER BY votes DESC LIMIT 5"
     retval = dbquery(query)
     c = 0
@@ -100,7 +101,11 @@ def index():
             </script>
 </body>
 </html>
-'''
+'''}
+    except{
+    return"</body></html>" 
+
+    }
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
