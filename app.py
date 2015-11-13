@@ -124,6 +124,9 @@ def index():
     except:
         f = open('index.html','r');
         return f.read()+"</body></html>"
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session['signin']="FALLOUT4ISAMAZINGBRUH"
 @app.route('/loginpg', methods=['GET', 'POST'])
 def loginpg():
     html = '''
