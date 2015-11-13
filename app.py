@@ -134,7 +134,7 @@ def loginpg():
     <body>
     <form action="/login" method="POST">
     ENTER USERNAME: <input type="text" name="username"><br>
-    ENTER PASS: <input type="text" name="password"><br>
+    ENTER PASS: <input type="secret" name="password"><br>
     <input type="submit" value="Submit">
     </form>
     </body>
