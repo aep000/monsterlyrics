@@ -147,7 +147,8 @@ def loginpg():
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
     try:
-        test =session['signin']
+        if (session['signin']!="login"):
+            return redirect("/", code=302)
     except:
         return redirect("/", code=302)
     query ="DELETE FROM votes"
@@ -155,7 +156,10 @@ def reset():
     return redirect("/dashboard", code=302)
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dash():
-    if (session['signin']!="login"):
+    try:
+        if (session['signin']!="login"):
+            return redirect("/", code=302)
+    except:
         return redirect("/", code=302)
     html ='''
     <!DOCTYPE HTML>
@@ -445,7 +449,10 @@ def hello():
         return html
 @app.route("/done", methods=['GET', 'POST'])
 def setDone():
-    if (session['signin']!="login"):
+    try:
+        if (session['signin']!="login"):
+            return redirect("/", code=302)
+    except:
         return redirect("/", code=302)
     songID = request.args.get('id')
     html = '''
@@ -464,7 +471,10 @@ def setDone():
     return html
 @app.route("/done2", methods=['GET', 'POST'])
 def setDone2():
-    if (session['signin']!="login"):
+    try:
+        if (session['signin']!="login"):
+            return redirect("/", code=302)
+    except:
         return redirect("/", code=302)
     songID = request.args.get('id')
     url = request.args.get('uri')
@@ -473,7 +483,10 @@ def setDone2():
     return redirect("/dashboard", code=302)
 @app.route("/nodo", methods=['GET', 'POST'])
 def setnodo():
-    if (session['signin']!="login"):
+    try:
+        if (session['signin']!="login"):
+            return redirect("/", code=302)
+    except:
         return redirect("/", code=302)
     songID = request.args.get('id')
     query = "INSERT INTO nodo (songid) VALUES ('"+songID+"')"
