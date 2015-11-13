@@ -132,7 +132,7 @@ def loginpg():
     <head>
     </head>
     <body>
-    <form action="done2" method="POST">
+    <form action="login" method="POST">
     ENTER USERNAME: <input type="text" name="username"><br>
     ENTER PASS: <input type="text" name="password"><br>
     <input type="submit" value="Submit">
