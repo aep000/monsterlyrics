@@ -127,6 +127,7 @@ def index():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['signin']="FALLOUT4ISAMAZINGBRUH"
+    return redirect("/", code=302)
 @app.route('/loginpg', methods=['GET', 'POST'])
 def loginpg():
     html = '''
@@ -145,7 +146,9 @@ def loginpg():
     return html
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
-    if (session['signin']!="login"):
+    try:
+        test =session['signin']
+    except:
         return redirect("/", code=302)
     query ="DELETE FROM votes"
     dbinsert(query)
@@ -209,6 +212,7 @@ def dash():
     						<header>
     							<h2>Search</h2>
                                 <a href="/reset" class="button fit">Reset</a>
+                                <a href="/logout" class="button fit">Log out</a>
     							<p><form method="get" action="/dashboard">
 										<div class="row uniform">
 											<div class="12u$">
