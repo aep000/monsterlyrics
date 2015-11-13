@@ -107,16 +107,16 @@ def index():
             datasets: [
             {
                 label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
+                fillColor: "rgba(255,255,255,1)",
+                strokeColor: "rgba(255,255,255,1)",
+                highlightFill: "rgba(255,255,255,1)",
+                highlightStroke: "rgba(255,255,255,1)",
                 data: '''+votes+'''
                 }
                 ]
             }
 
-            var myBarChart = new Chart(ctx).Bar(data);
+            var myBarChart = new Chart(ctx).HorizontalBar(data);
                 </script>
     </body>
     </html>
