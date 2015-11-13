@@ -126,7 +126,6 @@ def index():
         return f.read()+"</body></html>"
 @app.route('/loginpg', methods=['GET', 'POST'])
 def loginpg():
-    songID = request.args.get('id')
     html = '''
 
     <html>
@@ -140,6 +139,7 @@ def loginpg():
     </form>
     </body>
     '''
+    return html
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
     if (session['signin']!="login"):
