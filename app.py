@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify
+from flask import Flask, session, request, redirect, jsonify
 import json
 import os
 import urllib
@@ -6,6 +6,7 @@ import psycopg2 as mdb
 import urlparse
 import sys
 import logging
+import hashlib
 
 def dbquery(query):
     urlparse.uses_netloc.append("postgres")
@@ -55,6 +56,23 @@ def songExists(songID,q):
 app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
+app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    try:
+        comb = request.form['username']+request.form['password']
+        h = hashlib.new('ripemd160')
+        h.update(comb)
+        val = h.hexdigest()
+        if val =='cb02004b2aeed5989bd87665ba162ed8febc27d1' or val == 'bc274bfca744d3d21b79f5ae24d9139fdd7f284b' :
+            session['signin']="login"
+            return redirect("/dashboard", code=302)
+        else:
+            return redirect("/loginpg", code=302)
+
+    except:
+        return redirect("/", code=302)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     try:
@@ -106,15 +124,33 @@ def index():
     except:
         f = open('index.html','r');
         return f.read()+"</body></html>"
+@app.route('/loginpg', methods=['GET', 'POST'])
+def loginpg():
+    songID = request.args.get('id')
+    html = '''
 
-
+    <html>
+    <head>
+    </head>
+    <body>
+    <form action="done2" method="POST">
+    ENTER USERNAME: <input type="text" name="username"><br>
+    ENTER PASS: <input type="text" name="password"><br>
+    <input type="submit" value="Submit">
+    </form>
+    </body>
+    '''
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
+    if (session['signin']!="login"):
+        return redirect("/", code=302)
     query ="DELETE FROM votes"
     dbinsert(query)
     return redirect("/dashboard", code=302)
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dash():
+    if (session['signin']!="login"):
+        return redirect("/", code=302)
     html ='''
     <!DOCTYPE HTML>
     <!--
@@ -402,6 +438,8 @@ def hello():
         return html
 @app.route("/done", methods=['GET', 'POST'])
 def setDone():
+    if (session['signin']!="login"):
+        return redirect("/", code=302)
     songID = request.args.get('id')
     html = '''
 
@@ -419,6 +457,8 @@ def setDone():
     return html
 @app.route("/done2", methods=['GET', 'POST'])
 def setDone2():
+    if (session['signin']!="login"):
+        return redirect("/", code=302)
     songID = request.args.get('id')
     url = request.args.get('uri')
     query = "INSERT INTO done (songid, url) VALUES ('"+songID+"', '"+url+"')"
@@ -426,6 +466,8 @@ def setDone2():
     return redirect("/dashboard", code=302)
 @app.route("/nodo", methods=['GET', 'POST'])
 def setnodo():
+    if (session['signin']!="login"):
+        return redirect("/", code=302)
     songID = request.args.get('id')
     query = "INSERT INTO nodo (songid) VALUES ('"+songID+"')"
     dbinsert(query)
