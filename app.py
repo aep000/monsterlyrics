@@ -347,7 +347,7 @@ def hello():
                     <th>Album Cover</th>
                     <th>Name</th>
                     <th>Album</th>\
-                    <th>Artists</th>
+                    <th>Artist(s)</th>
                     <th>Preview</th>
                     <th>Vote</th>
                 </tr>
@@ -369,7 +369,7 @@ def hello():
                 artists += artist['name']+", "
             artists = artists[:-2]
             Id = item['id']
-            html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls style="width: 200px;"><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
+            html += "<tr height="120"><td color="#303030"><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls style="width: 300px;"><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
             tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
         html += '''
         </tbody>
@@ -389,7 +389,7 @@ def hello():
     <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright">
-    <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+    <li>&copy; MonsterLyrics</li>
     </ul>
     </footer>
 
