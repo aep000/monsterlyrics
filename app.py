@@ -369,7 +369,7 @@ def hello():
                 artists += artist['name']+", "
             artists = artists[:-2]
             Id = item['id']
-            html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls style="width: 300px;"><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
+            html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls style="width: 250px;"><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
             tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
         html += '''
         </tbody>
@@ -489,15 +489,9 @@ def cast():
         for row in retval:
             url = row[1]
         html = '''
-        <!DOCTYPE HTML>
-        <!--
-        	Spectral by HTML5 UP
-        	html5up.net | @n33co
-        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-        -->
         <html>
         	<head>
-        		<title>Generic - Spectral by HTML5 UP</title>
+        		<title>MonsterLyrics</title>
         		<meta charset="utf-8" />
         		<meta name="viewport" content="width=device-width, initial-scale=1" />
         		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -511,25 +505,9 @@ def cast():
         			<div id="page-wrapper">
 
         				<!-- Header -->
-        					<header id="header">
-        						<h1><a href="index.html">Spectral</a></h1>
-        						<nav id="nav">
-        							<ul>
-        								<li class="special">
-        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-        									<div id="menu">
-        										<ul>
-        											<li><a href="index.html">Home</a></li>
-        											<li><a href="generic.html">Generic</a></li>
-        											<li><a href="elements.html">Elements</a></li>
-        											<li><a href="#">Sign Up</a></li>
-        											<li><a href="#">Log In</a></li>
-        										</ul>
-        									</div>
-        								</li>
-        							</ul>
-        						</nav>
-        					</header>
+    					<header id="header">
+    						<h1><a href="/">MonsterLyrics</a></h1>
+    					</header>
 
         				<!-- Main -->
         					<article id="main">
@@ -549,7 +527,7 @@ def cast():
         							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
         						</ul>
         						<ul class="copyright">
-        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        							<li>&copy; MonsterLyrics</li>
         						</ul>
         					</footer>
 
@@ -569,15 +547,9 @@ def cast():
         '''
     elif nodo == '1':
         html = '''
-        <!DOCTYPE HTML>
-        <!--
-        	Spectral by HTML5 UP
-        	html5up.net | @n33co
-        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-        -->
         <html>
         	<head>
-        		<title>Generic - Spectral by HTML5 UP</title>
+        		<title>MonsterLyrics</title>
         		<meta charset="utf-8" />
         		<meta name="viewport" content="width=device-width, initial-scale=1" />
         		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -590,31 +562,16 @@ def cast():
         		<!-- Page Wrapper -->
         			<div id="page-wrapper">
 
-        				<!-- Header -->
-        					<header id="header">
-        						<h1><a href="index.html">Spectral</a></h1>
-        						<nav id="nav">
-        							<ul>
-        								<li class="special">
-        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-        									<div id="menu">
-        										<ul>
-        											<li><a href="index.html">Home</a></li>
-        											<li><a href="generic.html">Generic</a></li>
-        											<li><a href="elements.html">Elements</a></li>
-        											<li><a href="#">Sign Up</a></li>
-        											<li><a href="#">Log In</a></li>
-        										</ul>
-        									</div>
-        								</li>
-        							</ul>
-        						</nav>
-        					</header>
-
+				<!-- Header -->
+    					<header id="header">
+    						<h1><a href="/">MonsterLyrics</a></h1>
+    					</header>
+						
         				<!-- Main -->
         					<article id="main">
         						<header>
-        							<h2>SORRY WE ARE NOT GOING TO DO THIS ONE</h2>
+        							<h2>WE DON'T PLAN TO DO THIS ONE.</h2>
+									<p style="align:center">Sorry about that</p>
         							<a href = "/"><p>CLICK HERE TO RETURN TO THE HOMEPAGE</p></a>
         						</header>
         					</article>
@@ -629,7 +586,7 @@ def cast():
         							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
         						</ul>
         						<ul class="copyright">
-        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        							<li>&copy; MonsterLyrics</li>
         						</ul>
         					</footer>
 
@@ -649,15 +606,9 @@ def cast():
         '''
     else:
         html = '''
-        <!DOCTYPE HTML>
-        <!--
-        	Spectral by HTML5 UP
-        	html5up.net | @n33co
-        	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-        -->
         <html>
         	<head>
-        		<title>Generic - Spectral by HTML5 UP</title>
+        		<title>MonsterLyrics</title>
         		<meta charset="utf-8" />
         		<meta name="viewport" content="width=device-width, initial-scale=1" />
         		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -671,25 +622,9 @@ def cast():
         			<div id="page-wrapper">
 
         				<!-- Header -->
-        					<header id="header">
-        						<h1><a href="index.html">Spectral</a></h1>
-        						<nav id="nav">
-        							<ul>
-        								<li class="special">
-        									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-        									<div id="menu">
-        										<ul>
-        											<li><a href="index.html">Home</a></li>
-        											<li><a href="generic.html">Generic</a></li>
-        											<li><a href="elements.html">Elements</a></li>
-        											<li><a href="#">Sign Up</a></li>
-        											<li><a href="#">Log In</a></li>
-        										</ul>
-        									</div>
-        								</li>
-        							</ul>
-        						</nav>
-        					</header>
+    					<header id="header">
+    						<h1><a href="/">MonsterLyrics</a></h1>
+    					</header>
 
         				<!-- Main -->
         					<article id="main">
@@ -709,7 +644,7 @@ def cast():
         							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
         						</ul>
         						<ul class="copyright">
-        							<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        							<li>&copy; MonsterLyrics</li>
         						</ul>
         					</footer>
 
