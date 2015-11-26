@@ -192,15 +192,17 @@ def dash():
 
     				<!-- Header -->
     					<header id="header">
-    						<h1><a href="/">Monsterlyrics</a></h1>
+    						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 
     				<!-- Main -->
     					<article id="main">
     						<header>
-    							<h2>Search</h2>
+    							<h2>Dashboard</h2>
                                 <a href="/reset" class="button fit">Reset</a>
                                 <a href="/logout" class="button fit">Log out</a>
+								<br>
+								<p>Admin Search</p>
     							<p><form method="get" action="/dashboard">
 										<div class="row uniform">
 											<div class="12u$">
@@ -266,7 +268,7 @@ def dash():
     <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright">
-    <li>&copy; MONSTERLYRICS</li>
+    <li>&copy; MonsterLyrics</li>
     </ul>
     </footer>
 
@@ -314,9 +316,9 @@ def hello():
     			<div id="page-wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1><a href="index.html">MonsterLyrics</a></h1>
-					</header>
+    					<header id="header">
+    						<h1><a href="/">MonsterLyrics</a></h1>
+    					</header>
 
     				<!-- Main -->
     					<article id="main">
@@ -367,7 +369,7 @@ def hello():
                 artists += artist['name']+", "
             artists = artists[:-2]
             Id = item['id']
-            html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
+            html += "<tr><td><image src="+albumart+' height="100" width="100"/></td><td>'+name+"</td><td>"+album+"</td><td>"+artists+'</td><td><audio controls style="width: 100px;"><source src="'+preview+'" type="audio/mpeg"></td><td><a href="/vote?id='+Id+'" class="button fit">Vote</a></td></tr>'
             tot+="\nTrack Name: "+name+"\nalbum name: "+album+'\nalbum art: <img src="'+albumart+'"/>\nartists: '+artists+"\nId: "+Id+"\n"
         html += '''
         </tbody>
