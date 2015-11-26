@@ -138,7 +138,7 @@ def loginpg():
     <body>
     <form action="/login" method="POST">
     ENTER USERNAME: <input type="text" name="username"><br>
-    ENTER PASS: <input type="secret" name="password"><br>
+    ENTER PASS: <input type="password" name="password"><br>
     <input type="submit" value="Submit">
     </form>
     </body>
@@ -240,7 +240,7 @@ def dash():
                     <th>Album Cover</th>
                     <th>Name</th>
                     <th>Album</th>\
-                    <th>Artists</th>
+                    <th>Artist(s)</th>
                     <th>Preview</th>
                     <th>Vote</th>
                 </tr>
@@ -282,7 +282,7 @@ def dash():
     <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
     </ul>
     <ul class="copyright">
-    <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+    <li>&copy; MONSTERLYRICS</li>
     </ul>
     </footer>
 
@@ -337,23 +337,6 @@ def hello():
 
     				<!-- Header -->
     					<header id="header">
-    						<h1><a href="/">Monsterlyrics</a></h1>
-    						<nav id="nav">
-    							<ul>
-    								<li class="special">
-    									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-    									<div id="menu">
-    										<ul>
-    											<li><a href="index.html">Home</a></li>
-    											<li><a href="generic.html">Generic</a></li>
-    											<li><a href="elements.html">Elements</a></li>
-    											<li><a href="#">Sign Up</a></li>
-    											<li><a href="#">Log In</a></li>
-    										</ul>
-    									</div>
-    								</li>
-    							</ul>
-    						</nav>
     					</header>
 
     				<!-- Main -->
