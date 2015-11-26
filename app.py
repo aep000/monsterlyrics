@@ -57,7 +57,6 @@ app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
-app.add_url_rule('/favicon.ico',redirect_to=url_for('static', filename='http://i.imgur.com/aTuvJcM.png'))
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     try:
