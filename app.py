@@ -191,7 +191,7 @@ def dash():
     			<div id="page-wrapper">
 
     				<!-- Header -->
-    					<header id="header">
+    					<header id="header" style="background-color:#243242">
     						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 
@@ -316,7 +316,7 @@ def hello():
     			<div id="page-wrapper">
 
 				<!-- Header -->
-    					<header id="header">
+    					<header id="header" style="background-color:#243242">
     						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 
@@ -505,7 +505,7 @@ def cast():
         			<div id="page-wrapper">
 
         				<!-- Header -->
-    					<header id="header">
+    					<header id="header" style="background-color:#243242">
     						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 
@@ -563,7 +563,7 @@ def cast():
         			<div id="page-wrapper">
 
 				<!-- Header -->
-    					<header id="header">
+    					<header id="header" style="background-color:#243242">
     						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 						
@@ -622,7 +622,7 @@ def cast():
         			<div id="page-wrapper">
 
         				<!-- Header -->
-    					<header id="header">
+    					<header id="header" style="background-color:#243242">
     						<h1><a href="/">MonsterLyrics</a></h1>
     					</header>
 
